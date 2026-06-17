@@ -60,4 +60,12 @@ class Conge {
 
         return $stmt->execute();
     }
+
+    public function getDemandes($employe_id) {
+        $q = "SELECT * FROM conge WHERE employe_id = :id ORDER BY id DESC";
+        $stmt = $this->conn->prepare($q);
+        $stmt->bindParam(":id", $employe_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
